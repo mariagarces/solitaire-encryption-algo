@@ -1,0 +1,19 @@
+.cards-list {
+    display: flex;
+    flex-direction: column;
+}
+
+img.card {
+  width: 70px;
+  border-radius: 3px;
+  margin-left: -52px;
+}
+
+.hhand img.card {
+    padding-top: 10px;
+}
+
+.hhand.active-hand img.card:hover {
+    padding-top: 0px;
+    padding-bottom: 10px;
+}
