@@ -1,10 +1,11 @@
 import random
-from card import *
+from .card import Card
 
 class Deck:
-    def __init__(self):
-        self.cards = []
-        self.build()
+    def __init__(self, cards=[]):
+        self.cards = cards
+        if cards == []:
+            self.build()
 
     def update_deck(self, first, middle, last):
         self.cards = []
@@ -27,13 +28,13 @@ class Deck:
         for c in self.cards:
             c.show()
 
-    def get_index(self, suit):
+    def get_joker_index(self, suit):
         for index, c in enumerate(self.cards):
             if c.suit == suit:
                 return index
         return None
 
-    def remove_card(self, suit):
+    def remove_joker_card(self, suit):
         for index, c in enumerate(self.cards):
             if c.suit == suit:
                 self.cards.pop(index)
@@ -41,5 +42,5 @@ class Deck:
     def __len__(self):
         return len(self.cards)
 
-    def __getitem__(self, cards):
-        return self.cards[cards]
+    def __getitem__(self, value):
+        return self.cards[value]

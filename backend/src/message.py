@@ -7,7 +7,7 @@ class Message:
     def update_message(self, message):
         self.message = message
 
-    def remove_spec_shar(self):
+    def remove_spec_char(self):
         self.message = re.sub('[^A-Za-z]+', '', self.message)
 
     def format_text_to_number(self):

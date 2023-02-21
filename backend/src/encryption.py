@@ -1,5 +1,5 @@
-from card import *
-from deck import *
+from .card import Card
+from .deck import Deck
 
 class Encryption:
     def __init__(self, deck):
@@ -7,7 +7,7 @@ class Encryption:
         #encrypted message?
 
     def move_positions(self, pos, dis, joker):
-        self.deck.remove_card(joker.suit)
+        self.deck.remove_joker_card(joker.suit)
         step = pos + dis
         left_deck = self.deck[:step]
         right_deck = self.deck[step:]
@@ -22,16 +22,16 @@ class Encryption:
             self.deck.update_deck(left_deck, [joker], right_deck)
 
     def move_black_joker(self):
-        index = self.deck.get_index("BJ")
+        index = self.deck.get_joker_index("BJ")
         self.move_positions(index, 1, Card("BJ", 53))
 
     def move_red_joker(self):
-        index = self.deck.get_index("RJ")
+        index = self.deck.get_joker_index("RJ")
         self.move_positions(index, 2, Card("RJ", 53))
 
     def execute_triple_cut(self):
-        black_joker_index = self.deck.get_index("BJ")
-        red_joker_index = self.deck.get_index("RJ")
+        black_joker_index = self.deck.get_joker_index("BJ")
+        red_joker_index = self.deck.get_joker_index("RJ")
 
         if black_joker_index > red_joker_index:
             deck_after_black_joker = self.deck[black_joker_index+1:]

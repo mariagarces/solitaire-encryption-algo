@@ -2,7 +2,6 @@ class Card:
     def __init__(self, suit, value):
         self.suit = suit
         self.value = value
-        #AS, 2S
 
     def get_real_value(self):
         if self.suit == "C":
