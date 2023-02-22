@@ -7,6 +7,11 @@ const getKeyCards = async () => {
     return data.cards;
 }
 
+const getKeyCardsShuffle = async () => {
+    const { data } = await axios.get(URL+"/cards/shuffle");
+    return data.cards;
+}
+
 const postMessage = async (message) => {
     const { data } = await axios.post(URL+"/message", {
       message,
@@ -19,4 +24,4 @@ const getEncryptedMessage = async () => {
     return data.message;
 }
 
-export {getKeyCards, postMessage, getEncryptedMessage}
+export {getKeyCards, postMessage, getEncryptedMessage, getKeyCardsShuffle}

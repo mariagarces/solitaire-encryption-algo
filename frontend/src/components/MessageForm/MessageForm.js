@@ -1,27 +1,23 @@
 import React from "react";
-import { useState } from "react";
-import { postMessage } from "../../services/encryptionService";
+import { useState, useEffect } from "react";
 
-const MessageForm = () => {
-  const [message, setMessage] = useState("");
+const MessageForm = ({ message, handleChange, handleClick }) => {
+  const [disabled, setDisabled] = useState(true);
 
-  const handleClick = () => {
-    postMessage(message).then((result) => {
-      console.log(result);
-    });
-  };
-
-  const handleChange = (event) => {
-    setMessage(event.target.value);
-  };
+  useEffect(() => {
+    if (message === "") setDisabled(true);
+    else setDisabled(false);
+  }, [message]);
 
   return (
     <div className="message-form">
-        <label>
-          Write message
-          <input type="text" onChange={handleChange} />
-        </label>
-        <button click="submit" onClick={handleClick}>Submit</button>
+      <label>
+        Write message
+        <input value={message} type="text" onChange={handleChange} />
+      </label>
+      <button disabled={disabled} click="submit" onClick={handleClick}>
+        Submit
+      </button>
     </div>
   );
 };
