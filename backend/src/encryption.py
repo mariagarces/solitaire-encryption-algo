@@ -2,23 +2,20 @@ from .card import Card
 from .deck import Deck
 
 class Encryption:
-    def __init__(self, deck):
+    def __init__(self, deck: list):
         self.deck = deck
-        #encrypted message?
 
-    def move_positions(self, pos, dis, joker):
+    def move_positions(self, pos: int, dis: int, joker: Card):
         self.deck.remove_joker_card(joker.suit)
         step = pos + dis
         left_deck = self.deck[:step]
         right_deck = self.deck[step:]
 
         if len(self.deck) == pos:
-            # when jocker is last
             self.deck.update_deck(left_deck[:dis], [joker],  left_deck[dis:])
         elif len(self.deck)-1 == pos and joker.suit == "RJ":
             self.deck.update_deck(left_deck[:1], [joker], left_deck[1:])
         else:
-            # when joker is in the middle
             self.deck.update_deck(left_deck, [joker], right_deck)
 
     def move_black_joker(self):
@@ -51,7 +48,7 @@ class Encryption:
         final_card = self.deck[-1]
         self.deck.update_deck(middle_deck, cut_deck, [final_card])
 
-    def find_output_value(self):
+    def find_output_value(self) -> int:
         index = self.deck[0].get_real_value()
         if index == "RJ":
             value = index
@@ -66,7 +63,7 @@ class Encryption:
 
         return value
 
-    def execute_encryption(self, message):
+    def execute_encryption(self, message: str) -> list:
         l = 0
         keystream = []
 

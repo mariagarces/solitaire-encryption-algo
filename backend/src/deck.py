@@ -7,7 +7,7 @@ class Deck:
         if cards == []:
             self.build()
 
-    def update_deck(self, first, middle, last):
+    def update_deck(self, first: list, middle: list, last: list):
         self.cards = []
         self.cards = first + middle + last
 
@@ -29,13 +29,13 @@ class Deck:
         for c in self.cards:
             c.show()
 
-    def get_joker_index(self, suit):
+    def get_joker_index(self, suit: str):
         for index, c in enumerate(self.cards):
             if c.suit == suit:
                 return index
         return None
 
-    def remove_joker_card(self, suit):
+    def remove_joker_card(self, suit: str):
         for index, c in enumerate(self.cards):
             if c.suit == suit:
                 self.cards.pop(index)
@@ -43,5 +43,5 @@ class Deck:
     def __len__(self):
         return len(self.cards)
 
-    def __getitem__(self, value):
+    def __getitem__(self, value: int):
         return self.cards[value]

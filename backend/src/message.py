@@ -4,7 +4,7 @@ class Message:
     def __init__(self, message=""):
         self.message = message
 
-    def update_message(self, message):
+    def update_message(self, message: str):
         self.message = message
 
     def remove_spec_char(self):
@@ -25,7 +25,7 @@ class Message:
     def __len__(self):
         return len(self.message)
 
-    def obtain_cypher_text(self, keystream):
+    def obtain_cypher_text(self, keystream: list):
         result = []
         for (k,m) in zip(keystream, self.message):
             value = k + m

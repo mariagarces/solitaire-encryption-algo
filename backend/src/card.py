@@ -1,9 +1,9 @@
 class Card:
-    def __init__(self, suit, value):
+    def __init__(self, suit: str, value: int):
         self.suit = suit
         self.value = value
 
-    def get_real_value(self):
+    def get_real_value(self) -> int:
         if self.suit == "C":
             return self.value
         elif self.suit == "D":
