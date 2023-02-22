@@ -6,6 +6,7 @@ class Main:
     def __init__(self):
         self.deck = Deck()
         self.message = Message()
+        keystream = []
 
     def load_message(self, message: str):
         self.message.update_message(message)
@@ -20,9 +21,18 @@ class Main:
         self.deck.shuffle()
         return self.deck
 
+    def get_current_state_cards(self) -> Deck:
+        return self.deck
+
     def get_encrypted_message(self) -> Message:
         encryption = Encryption(self.deck)
-        keystream = encryption.execute_encryption(self.message)
-        self.message.obtain_cypher_text(keystream)
+        self.keystream = encryption.execute_encryption(self.message)
+        self.message.obtain_cypher_text(self.keystream)
+        self.message.format_number_to_text()
+        return self.message
+
+    def get_decrypted_message(self) -> Message:
+        self.message.format_text_list_to_number()
+        self.message.decrypt_message(self.keystream)
         self.message.format_number_to_text()
         return self.message

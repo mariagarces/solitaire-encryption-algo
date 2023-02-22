@@ -33,7 +33,17 @@ def get_key_cards_shuffle():
     cards = main.get_key_cards_shuffle()
     return cards
 
+@app.get("/cards/current-state")
+def get_current_state_cards():
+    cards = main.get_current_state_cards()
+    return cards
+
 @app.get("/message/encrypt")
 def get_encrypted_message():
     encrypt_message = main.get_encrypted_message()
     return encrypt_message
+
+@app.get("/message/decrypt")
+def get_decrypted_message():
+    decrypt_message = main.get_decrypted_message()
+    return decrypt_message

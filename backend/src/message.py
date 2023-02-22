@@ -16,6 +16,13 @@ class Message:
             new_message.append(ord(l) - 64)
         self.message = new_message
 
+    def format_text_list_to_number(self):
+        new_message = []
+        self.message = [l.upper() for l in self.message]
+        for l in self.message:
+            new_message.append(ord(l) - 64)
+        self.message = new_message
+
     def format_number_to_text(self):
         new_message = []
         for l in self.message:
@@ -33,5 +40,15 @@ class Message:
                 result.append(value - 26)
             else:
                 result.append(value)
+
+        self.message = result
+
+    def decrypt_message(self, keystream: list):
+        result = []
+        for (c,k) in zip(self.message, keystream):
+            if c < k:
+                result.append(c + 26 - k)
+            else:
+                result.append(c - k)
 
         self.message = result

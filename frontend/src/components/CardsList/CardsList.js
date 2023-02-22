@@ -1,6 +1,4 @@
 import React from "react";
-import { useState } from "react";
-import { getKeyCards, getKeyCardsShuffle } from "../../services/encryptionService";
 import "./CardsList.css";
 
 const CardsList = ({ enabled, cards, handleCreateClick, handleShuffleClick }) => {
