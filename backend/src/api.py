@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import Body
-from main import *
+from .main import *
 
 app = FastAPI()
 origins = [
@@ -26,6 +26,11 @@ def load_message(message: str = Body(..., embed=True)):
 @app.get("/cards")
 def get_key_cards():
     cards = main.get_key_cards()
+    return cards
+
+@app.get("/cards/shuffle")
+def get_key_cards_shuffle():
+    cards = main.get_key_cards_shuffle()
     return cards
 
 @app.get("/message/encrypt")

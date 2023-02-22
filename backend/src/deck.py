@@ -12,6 +12,7 @@ class Deck:
         self.cards = first + middle + last
 
     def build(self):
+        self.cards = []
         for s in ["C", "D", "H", "S"]:
             for v in range(1,14):
                 self.cards.append(Card(s, v))
