@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import './MessageForm.css';
 
 const MessageForm = ({ message, handleChange, handleClick }) => {
   const [disabled, setDisabled] = useState(true);
@@ -11,9 +12,9 @@ const MessageForm = ({ message, handleChange, handleClick }) => {
 
   return (
     <div className="message-form">
-      <label>
+      <label className="label-form">
         Write message
-        <input value={message} type="text" onChange={handleChange} />
+        <input className="input-form" value={message} type="text" onChange={handleChange} />
       </label>
       <button disabled={disabled} click="submit" onClick={handleClick}>
         Submit

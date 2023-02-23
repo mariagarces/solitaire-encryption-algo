@@ -7,7 +7,7 @@ const CardsList = ({
   handleCreateClick,
   handleShuffleClick,
   swapCards,
-  handleSubmitCards
+  handleSubmitCards,
 }) => {
   const [list, setList] = useState([]);
 
@@ -21,7 +21,7 @@ const CardsList = ({
         elements.forEach((element) => {
           element.classList.remove("selected");
         });
-    }, 1000);
+      }, 1000);
     }
   }, [list]);
 
@@ -36,8 +36,14 @@ const CardsList = ({
 
   return (
     <div className="cards-list">
-      <button onClick={handleCreateClick}>Restart deck</button>
-      <button onClick={handleShuffleClick}>Shuffle</button>
+      <div className="cards-list-buttons">
+        <button className="btn-restart" onClick={handleCreateClick}>
+          Restart deck
+        </button>
+        <button className="btn-shuffle" onClick={handleShuffleClick}>
+          Shuffle
+        </button>
+      </div>
       <div className="hand hhand active-hand">
         {cards &&
           cards.map((card) => {
@@ -54,7 +60,9 @@ const CardsList = ({
             );
           })}
       </div>
-      <button onClick={handleSubmitCards}>Submit cards</button>
+      <button className="btn-submit" onClick={handleSubmitCards}>
+        Submit cards
+      </button>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import {
   postMessage,
   getDecryptedMessage,
   postCards,
-  getCardsCurrentState
+  getCardsCurrentState,
 } from "./services/encryptionService";
 
 import Deck from "./models/Deck";
@@ -30,7 +30,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (msgValue !== "" && cards.length !== 0 && hasSubmittedCards && hasSubmittedMsg) setDisabledE(false);
+    if (
+      msgValue !== "" &&
+      cards.length !== 0 &&
+      hasSubmittedCards &&
+      hasSubmittedMsg
+    )
+      setDisabledE(false);
     else setDisabledE(true);
   }, [cards, msgValue, hasSubmittedCards, hasSubmittedMsg]);
 
@@ -83,23 +89,26 @@ function App() {
   const swapCards = (from, to) => {
     const newCards = [...cards];
     [newCards[from], newCards[to]] = [newCards[to], newCards[from]];
-    setCards(newCards)
-  }
+    setCards(newCards);
+  };
 
   const handleSubmitCards = () => {
     postCards(cards).then(() => {
       setHasSubmittedCards(true);
     });
-  }
+  };
 
   return (
     <div className="App">
+      <h1>Le chiffrement Solitaire de Bruce Schneier</h1>
       <MessageForm
         handleChange={handleChangeMessage}
         handleClick={handlePostClick}
         message={msgValue}
       />
-      {messageLoaded && <p>Message loaded: {currentMessage}</p>}
+      {messageLoaded && (
+        <p className="msg-loaded">Message loaded: {currentMessage}</p>
+      )}
       <CardsList
         cards={cards}
         handleCreateClick={handleCreateClick}
@@ -107,14 +116,18 @@ function App() {
         swapCards={swapCards}
         handleSubmitCards={handleSubmitCards}
       />
-      <button disabled={disabledE} onClick={handleEncryptClick}>
-        Encrypt message
-      </button>
-      {message}
-      <button disabled={disabledD} onClick={handleDecryptClick}>
-        Decrypt message
-      </button>
-      {decMessage}
+      <div className="encrypt-card">
+        <button className="encrypt-btn" disabled={disabledE} onClick={handleEncryptClick}>
+          Encrypt message
+        </button>
+        <p className="encrypt-text">{message}</p>
+      </div>
+      <div className="decrypt-card">
+        <button className="decrypt-btn" disabled={disabledD} onClick={handleDecryptClick}>
+          Decrypt message
+        </button>
+        <p className="decrypt-text">{decMessage}</p>
+      </div>
     </div>
   );
 }
