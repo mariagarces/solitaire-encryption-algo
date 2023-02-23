@@ -17,3 +17,12 @@ img.card {
     padding-top: 0px;
     padding-bottom: 10px;
 }
+
+.selected {
+    padding-top: 0px;
+    padding-bottom: 10px;
+}
+
+img.card.selected {
+    padding-top: 0px;
+}

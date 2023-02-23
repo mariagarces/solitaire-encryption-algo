@@ -36,3 +36,11 @@ class Main:
         self.message.decrypt_message(self.keystream)
         self.message.format_number_to_text()
         return self.message
+
+    def load_cards(self, cards: list):
+        cards_data = []
+        for c in cards:
+            cards_data.append(Card(**c))
+
+        deck = Deck(cards_data)
+        self.deck = deck

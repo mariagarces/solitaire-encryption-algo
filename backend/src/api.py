@@ -47,3 +47,8 @@ def get_encrypted_message():
 def get_decrypted_message():
     decrypt_message = main.get_decrypted_message()
     return decrypt_message
+
+@app.post("/load-cards")
+def load_cards(cards: list = Body(..., embed=True)):
+    main.load_cards(cards)
+    return {"response": "Cards loaded"}

@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import {
   getEncryptedMessage,
   postMessage,
-  getKeyCards,
-  getKeyCardsShuffle,
   getDecryptedMessage,
-  getCardsCurrentState,
+  postCards,
+  getCardsCurrentState
 } from "./services/encryptionService";
 
+import Deck from "./models/Deck";
 import CardsList from "./components/CardsList/CardsList";
 import MessageForm from "./components/MessageForm/MessageForm";
 
@@ -18,15 +18,21 @@ function App() {
   const [disabledD, setDisabledD] = useState(true);
   const [msgValue, setMsgValue] = useState("");
   const [cards, setCards] = useState([]);
-  const [enabledButtons, setEnabledButtons] = useState(true);
   const [messageLoaded, setMessageLoaded] = useState(false);
   const [decMessage, setDecMessage] = useState([]);
   const [currentMessage, setCurrentMessage] = useState("");
+  const [hasSubmittedCards, setHasSubmittedCards] = useState(false);
+  const [hasSubmittedMsg, setHasSubmittedMsg] = useState(false);
+  const deck = new Deck();
 
   useEffect(() => {
-    if (msgValue !== "" && cards.length !== 0) setDisabledE(false);
+    setCards(deck.getDeck());
+  }, []);
+
+  useEffect(() => {
+    if (msgValue !== "" && cards.length !== 0 && hasSubmittedCards && hasSubmittedMsg) setDisabledE(false);
     else setDisabledE(true);
-  }, [cards, msgValue]);
+  }, [cards, msgValue, hasSubmittedCards, hasSubmittedMsg]);
 
   const handleChangeMessage = (event) => {
     setMsgValue(event.target.value);
@@ -37,6 +43,7 @@ function App() {
       setMessage(result);
       setMsgValue("");
       setDisabledD(false);
+      setHasSubmittedCards(false);
     });
 
     getCardsCurrentState().then((result) => {
@@ -57,21 +64,33 @@ function App() {
       setMessage("");
       setDecMessage("");
       setCurrentMessage(msgValue.toUpperCase());
+      setHasSubmittedMsg(true);
     });
   };
 
   const handleCreateClick = () => {
-    getKeyCards().then((result) => {
-      setCards(result);
-      setEnabledButtons(false);
-    });
+    deck.build();
+    const newDeck = deck.getDeck();
+    setCards(newDeck);
   };
 
   const handleShuffleClick = () => {
-    getKeyCardsShuffle().then((result) => {
-      setCards(result);
-    });
+    deck.shuffle();
+    const newDeck = deck.getDeck();
+    setCards(newDeck);
   };
+
+  const swapCards = (from, to) => {
+    const newCards = [...cards];
+    [newCards[from], newCards[to]] = [newCards[to], newCards[from]];
+    setCards(newCards)
+  }
+
+  const handleSubmitCards = () => {
+    postCards(cards).then(() => {
+      setHasSubmittedCards(true);
+    });
+  }
 
   return (
     <div className="App">
@@ -82,10 +101,11 @@ function App() {
       />
       {messageLoaded && <p>Message loaded: {currentMessage}</p>}
       <CardsList
-        enabled={enabledButtons}
         cards={cards}
         handleCreateClick={handleCreateClick}
         handleShuffleClick={handleShuffleClick}
+        swapCards={swapCards}
+        handleSubmitCards={handleSubmitCards}
       />
       <button disabled={disabledE} onClick={handleEncryptClick}>
         Encrypt message

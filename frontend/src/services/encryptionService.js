@@ -34,11 +34,19 @@ const getDecryptedMessage = async () => {
   return data.message;
 };
 
+const postCards = async (cards) => {
+  const { data } = await axios.post(URL + "/load-cards", {
+    cards,
+  });
+  return data.response;
+}
+
 export {
   getKeyCards,
   postMessage,
   getEncryptedMessage,
   getKeyCardsShuffle,
   getDecryptedMessage,
-  getCardsCurrentState
+  getCardsCurrentState,
+  postCards
 };

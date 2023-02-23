@@ -1,3 +1,5 @@
+import json
+
 class Card:
     def __init__(self, suit: str, value: int):
         self.suit = suit
@@ -17,3 +19,7 @@ class Card:
 
     def show(self):
         print("{} {}".format(self.value, self.suit))
+
+    def from_json(cls, json_string):
+        json_dict = json.loads(json_string)
+        return cls(**json_dict)
