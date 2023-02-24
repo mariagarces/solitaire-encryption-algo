@@ -13,7 +13,7 @@ const MessageForm = ({ message, handleChange, handleClick }) => {
   return (
     <div className="message-form">
       <label className="label-form">
-        Write message
+        Message
         <input className="input-form" value={message} type="text" onChange={handleChange} />
       </label>
       <button disabled={disabled} click="submit" onClick={handleClick}>

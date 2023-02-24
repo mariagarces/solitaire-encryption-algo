@@ -107,7 +107,7 @@ function App() {
         message={msgValue}
       />
       {messageLoaded && (
-        <p className="msg-loaded">Message loaded: {currentMessage}</p>
+        <p className="msg-loaded">Message enregistré: {currentMessage}</p>
       )}
       <CardsList
         cards={cards}
@@ -118,13 +118,13 @@ function App() {
       />
       <div className="encrypt-card">
         <button className="encrypt-btn" disabled={disabledE} onClick={handleEncryptClick}>
-          Encrypt message
+          Message crypté
         </button>
         <p className="encrypt-text">{message}</p>
       </div>
       <div className="decrypt-card">
         <button className="decrypt-btn" disabled={disabledD} onClick={handleDecryptClick}>
-          Decrypt message
+          Message décrypté
         </button>
         <p className="decrypt-text">{decMessage}</p>
       </div>

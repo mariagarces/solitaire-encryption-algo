@@ -61,7 +61,7 @@ const CardsList = ({
           })}
       </div>
       <button className="btn-submit" onClick={handleSubmitCards}>
-        Submit cards
+        Enregistrer les cartes
       </button>
     </div>
   );
