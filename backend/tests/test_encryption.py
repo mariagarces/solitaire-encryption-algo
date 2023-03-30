@@ -47,6 +47,12 @@ def test_execute_triple_cut(encrypt):
     deck = Deck([Card("BJ", 53),Card("RJ", 53),Card('C',1),Card('H',2),Card('H',3),Card('H',4)])
     assert compare_lists(encrypt.deck, deck) == True
 
+def test_execute_triple_cut_bj_after(encrypt):
+    encrypt.move_black_joker()
+    encrypt.execute_triple_cut()
+    deck = Deck([Card("RJ", 53),Card("BJ", 53),Card('C',1),Card('H',2),Card('H',3),Card('H',4)])
+    assert compare_lists(encrypt.deck, deck) == True
+
 def test_execute_count_cut(encrypt):
     encrypt.execute_triple_cut()
     encrypt.execute_count_cut()
