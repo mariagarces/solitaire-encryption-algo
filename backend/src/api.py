@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import Body
+from fastapi import Body, Response
 from .main import *
 
 app = FastAPI()
@@ -18,6 +18,12 @@ app.add_middleware(
 )
 
 main = Main()
+
+@app.middleware("https")
+async def add_cors_header(request, call_next):
+    response = await call_next(request)
+    response.headers["Access-Control-Allow-Origin"] = "https://solitaire-encryption.vercel.app/"
+    return response
 
 @app.post("/message")
 def load_message(message: str = Body(..., embed=True)):
