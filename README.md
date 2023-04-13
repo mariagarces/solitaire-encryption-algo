@@ -25,6 +25,7 @@ uvicorn src.api:app --reload
 
 cd frontend
 npm run start
+```
 
 ## Usage
 Once the server and the React app are running, you can use the Solitaire Cipher to encrypt and decrypt messages. Simply type in your message, choose the order of the card and click the "Submit" button for each area. Whether you want to encrypt or decrypt it click the corresponding button, and the app will generate a key stream using the Solitaire Cipher algorithm and use it to encrypt or decrypt your message.
